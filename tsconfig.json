@@ -1,0 +1,27 @@
+{
+    "include": [
+      "./src/*.ts",
+      "./test/*.ts",
+    ],
+  
+    "compilerOptions": {
+      "strict": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+  
+      "target": "ES2020",
+      "module": "CommonJS",
+      "esModuleInterop": true,
+      "sourceMap": true,
+      "outDir": "dist"
+    },
+    "typedocOptions": {
+      "entryPoints": [
+        "src/utility.ts",
+      ],
+      "out": "doc",
+      "disableSources": true,
+      "excludePrivate": true,
+      "readme": "README.md"
+    }
+  }

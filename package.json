@@ -1,5 +1,36 @@
 {
+  "name": "ps0",
+  "private": true,
+  "engines": {
+    "node": "^14.15.x",
+    "vscode": "^1.59.0"
+  },
+  "scripts": {
+    "compile": "tsc",
+    "start": "tsc && node -r source-map-support/register dist/src/TurtleSoup.js",
+    "test": "tsc && npx mocha --require source-map-support/register dist/test",
+    "lint": "tsc && npx eslint . --ext .ts"
+  },
+  "mocha": {
+    "reporter": "spec",
+    "exit": true
+  },
   "dependencies": {
-    "typescript": "^4.4.3"
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^14.14.25",
+    "assert": "^2.0.0",
+    "mocha": "^9.1.1",
+    "open": "^7.4.0",
+    "source-map-support": "^0.5.19"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "eslint": "^7.20.0",
+    "eslint-config-standard-with-typescript": "^20.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "typescript": "^4.4.2"
   }
 }
