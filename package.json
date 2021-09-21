@@ -7,7 +7,7 @@
   },
   "scripts": {
     "compile": "tsc",
-    "start": "tsc && node -r source-map-support/register dist/src/TurtleSoup.js",
+    "start": "tsc && node -r source-map-support/register dist/src/Main.js",
     "test": "tsc && npx mocha --require source-map-support/register dist/test",
     "lint": "tsc && npx eslint . --ext .ts"
   },

@@ -1,9 +1,22 @@
+import { player } from "../Main";
 import { format } from "../utility"
+import type { Player } from "../Types/Player"
+
+export enum BASESTATS {
+    health = 100,
+    damage = 5,
+    strength = 0,
+    defense = 0,
+    criticalDamage = 0,
+    criticalChance = 0, 
+}
+
 export abstract class Stat {
     value: number
-    constructor() {
-        this.updateStat();
+    constructor(base: BASESTATS) {
+        this.value = base;
     }
+
     abstract updateStat():void
 
     displayStat():string {
@@ -13,8 +26,8 @@ export abstract class Stat {
 
 export class Health extends Stat {
     current: number
-    constructor() {
-        super();
+    constructor(base = BASESTATS.health) {
+        super(base);
         this.current = this.value;
     }
 
@@ -41,8 +54,8 @@ export class Health extends Stat {
 
     updateStat():void {
         let health = 0;
-        const base = 100;
-        const skill = 100;
+        const base = BASESTATS.health;
+        const skill = player.skills.idling.computeStatIncrease();
         for (const boost of [base, skill]) {
             health += boost
         }
