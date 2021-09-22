@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { player } from "../Main";
 import { Player } from "../Types/Player";
 import { format } from "../utility"

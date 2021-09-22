@@ -1,4 +1,3 @@
-import { kStringMaxLength } from "buffer"
 import { Combat, Idling, Looting } from "./Classes/Skills"
 import { Damage, Health, Strength } from "./Classes/Stats"
 import type { Player } from "./Types/Player"
