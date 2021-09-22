@@ -1,5 +1,5 @@
-import { Player } from '../Types/Player.js';
-import { format, sumLinear, sumQuadratic } from '../utility.js';
+import { Player } from '../Types/Player';
+import { format, sumLinear, sumQuadratic } from '../utility';
 
 export interface skillMetadata {
     maxLevel: number;

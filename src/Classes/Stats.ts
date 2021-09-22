@@ -1,6 +1,6 @@
-import { player } from '../Main.js';
-import { Player } from '../Types/Player.js';
-import { format } from '../utility.js';
+import { player } from '../Main';
+import { Player } from '../Types/Player';
+import { format } from '../utility';
 
 export interface statMetadata {
     baseStat: number;
