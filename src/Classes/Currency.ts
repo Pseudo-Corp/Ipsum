@@ -8,7 +8,7 @@ export class Currency {
     constructor(
         public amount: number,
         public options: CurrencyOptions = {
-            allowNegative: false,
+            allowNegative: false
         }
     ) {
         this.amount = amount;

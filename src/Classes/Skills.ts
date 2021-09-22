@@ -1,5 +1,5 @@
-import { Player } from "../Types/Player.js";
-import { format, sumLinear, sumQuadratic } from "../utility.js";
+import { Player } from '../Types/Player.js';
+import { format, sumLinear, sumQuadratic } from '../utility.js';
 
 export interface skillMetadata {
     maxLevel: number;
@@ -7,22 +7,22 @@ export interface skillMetadata {
     thresholds: number[];
 }
 
-export const skillData: Record<keyof Player["skills"], skillMetadata> = {
+export const skillData: Record<keyof Player['skills'], skillMetadata> = {
     combat: {
         maxLevel: 99,
         expCoefficient: 100,
-        thresholds: [0, 50, 90, 96],
+        thresholds: [0, 50, 90, 96]
     },
     idling: {
         maxLevel: 149,
         expCoefficient: 60,
-        thresholds: [0, 50, 100, 140, 146],
+        thresholds: [0, 50, 100, 140, 146]
     },
     looting: {
         maxLevel: 149,
         expCoefficient: 60,
-        thresholds: [0, 50, 100, 140, 146],
-    },
+        thresholds: [0, 50, 100, 140, 146]
+    }
 };
 
 export abstract class Skills {

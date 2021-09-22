@@ -1,4 +1,4 @@
-import assert from "assert";
+import assert from 'assert';
 
 /**
  *
@@ -34,7 +34,7 @@ export const sumCubic = (n: number): number => {
  * @returns a string of the number formatted to specific conditions.
  */
 export const format = (n: number, accuracy = 0): string => {
-    if (n < 0) return "-" + format(-n, accuracy);
+    if (n < 0) return '-' + format(-n, accuracy);
 
     const truncatedNumber = Math.floor(n);
     const decimalValue = n - truncatedNumber;
@@ -53,14 +53,14 @@ export const format = (n: number, accuracy = 0): string => {
 
     let returnDecimalValue = decimalPoint
         ? Math.floor(returnDecimalRaw).toString()
-        : "";
+        : '';
 
-    if (returnDecimalValue !== "") {
+    if (returnDecimalValue !== '') {
         while (returnDecimalValue.length < accuracy) {
-            returnDecimalValue = "0" + returnDecimalValue;
+            returnDecimalValue = '0' + returnDecimalValue;
         }
 
-        returnDecimalValue = "." + returnDecimalValue;
+        returnDecimalValue = '.' + returnDecimalValue;
     }
 
     return stringedInteger + returnDecimalValue;
@@ -81,11 +81,11 @@ export function assertAlmostEqual(
 ): void {
     assert(
         Math.abs(expected - actual) <= delta,
-        (message ? message + ", " : "") +
-            "expected <" +
+        (message ? message + ', ' : '') +
+            'expected <' +
             expected.toFixed(3) +
-            "> but got <" +
+            '> but got <' +
             actual.toFixed(3) +
-            ">"
+            '>'
     );
 }

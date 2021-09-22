@@ -1,21 +1,21 @@
-import { player } from "../Main.js";
-import { Player } from "../Types/Player.js";
-import { format } from "../utility.js";
+import { player } from '../Main.js';
+import { Player } from '../Types/Player.js';
+import { format } from '../utility.js';
 
 export interface statMetadata {
     baseStat: number;
 }
 
-export const statData: Record<keyof Player["stats"], statMetadata> = {
+export const statData: Record<keyof Player['stats'], statMetadata> = {
     health: {
-        baseStat: 100,
+        baseStat: 100
     },
     strength: {
-        baseStat: 0,
+        baseStat: 0
     },
     damage: {
-        baseStat: 10,
-    },
+        baseStat: 10
+    }
 };
 
 export abstract class Stat {
