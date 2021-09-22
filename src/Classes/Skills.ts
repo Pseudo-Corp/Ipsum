@@ -1,15 +1,28 @@
+import { Player } from "../Types/Player";
 import { format, sumLinear, sumQuadratic } from "../utility";
 
-export enum MAXSKILLS {
-    combat = 99,
-    idling = 149,
-    looting = 149,
+export interface skillMetadata {
+    maxLevel: number,
+    expCoefficient: number,
+    thresholds: Array<number>
 }
 
-export enum COEFFICIENTS {
-    combat = 100,
-    idling = 60,
-    looting = 60,
+export const skillData: Record<keyof Player['skills'], skillMetadata> = {
+    combat: {
+        maxLevel: 99,
+        expCoefficient: 100,
+        thresholds: [0, 50, 90, 96]
+    },
+    idling: {
+        maxLevel: 149,
+        expCoefficient: 60,
+        thresholds: [0, 50, 100, 140, 146]
+    },
+    looting: {
+        maxLevel: 149,
+        expCoefficient: 60,
+        thresholds: [0, 50, 100, 140, 146]
+    }
 }
 
 export abstract class Skills {
@@ -19,16 +32,15 @@ export abstract class Skills {
     expCoefficient: number
     thresholds: Array<number>
 
-    constructor(maxLevel: MAXSKILLS, level: number, exp: number, expCoefficient: COEFFICIENTS) {
-        this.maxLevel = maxLevel;
+    constructor(infos: skillMetadata, level = 0, exp = 0) {
+        this.maxLevel = infos.maxLevel;
+        this.expCoefficient = infos.expCoefficient;
+        this.thresholds = infos.thresholds;
         this.level = level;
         this.exp = exp;
-        this.expCoefficient = expCoefficient;
-        // Levels that define a "break point", essentially checkpoints for the skill.
-        this.thresholds = [0, 50, 90, 96]
-
         this.calculateLevel();
-    };
+    }
+
 
     calculateEXPToLevelUp(n?: number):number {
         let rawLevel = n || this.level + 1
@@ -95,8 +107,8 @@ export abstract class Skills {
 
 export class Combat extends Skills {
 
-    constructor(maxLevel = MAXSKILLS.combat, level = 0, exp = 0, expCoefficient = COEFFICIENTS.combat) {
-        super(maxLevel, level, exp, expCoefficient)
+    constructor(level = 0, exp = 0) {
+        super(skillData.combat, level, exp)
     }
 
     computeStatIncrease(n?: number):number {
@@ -127,8 +139,8 @@ export class Combat extends Skills {
 
 export class Idling extends Skills {
 
-    constructor(maxLevel = MAXSKILLS.idling, level = 0, exp = 0, expCoefficient = COEFFICIENTS.idling) {
-        super(maxLevel, level, exp, expCoefficient)
+    constructor(level = 0, exp = 0) {
+        super(skillData.idling, level, exp)
     }
 
     computeStatIncrease(n?: number):number {
@@ -147,8 +159,8 @@ export class Idling extends Skills {
 
 export class Looting extends Skills {
 
-    constructor(maxLevel = MAXSKILLS.looting, level = 0, exp = 0, expCoefficient = COEFFICIENTS.looting) {
-        super(maxLevel, level, exp, expCoefficient)
+    constructor(level = 0, exp = 0) {
+        super(skillData.looting, level, exp)
     }
 
     computeStatIncrease(n?: number):number {

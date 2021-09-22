@@ -1,20 +1,27 @@
+import { stat } from "fs";
 import { player } from "../Main";
+import { Player } from "../Types/Player";
 import { format } from "../utility"
-import type { Player } from "../Types/Player"
 
-export enum BASESTATS {
-    health = 100,
-    damage = 5,
-    strength = 0,
-    defense = 0,
-    criticalDamage = 0,
-    criticalChance = 0, 
+export interface statMetadata {
+    baseStat: number
+}
+export const statData: Record<keyof Player['stats'], statMetadata> = {
+    health: {
+        baseStat: 100
+    },
+    strength: {
+        baseStat: 0
+    },
+    damage: {
+        baseStat: 10
+    },
 }
 
 export abstract class Stat {
     value: number
-    constructor(base: BASESTATS) {
-        this.value = base;
+    constructor(infos: statMetadata) {
+        this.value = infos.baseStat;
     }
 
     abstract updateStat():void
@@ -26,8 +33,8 @@ export abstract class Stat {
 
 export class Health extends Stat {
     current: number
-    constructor(base = BASESTATS.health) {
-        super(base);
+    constructor() {
+        super(statData.health);
         this.current = this.value;
     }
 
@@ -54,12 +61,43 @@ export class Health extends Stat {
 
     updateStat():void {
         let health = 0;
-        const base = BASESTATS.health;
+        const base = statData.health.baseStat;
         const skill = player.skills.idling.computeStatIncrease();
         for (const boost of [base, skill]) {
             health += boost
         }
         this.value = health;
         this.checkBoundary();
+    }
+}
+
+export class Strength extends Stat {
+    constructor() {
+        super(statData.strength)
+    }
+
+    updateStat():void {
+        let strength = 0;
+        const base = statData.strength.baseStat;
+        const skill = player.skills.combat.computeStatIncrease();
+        for (const boost of [base, skill]) {
+            strength += boost;
+        }
+        this.value = strength;
+    }
+}
+
+export class Damage extends Stat {
+    constructor() {
+        super(statData.damage)
+    }
+
+    updateStat():void {
+        let damage = 0;
+        const base = statData.damage.baseStat;
+        for (const boost of [base]) {
+            damage += boost;
+        }
+        this.value = damage;
     }
 }

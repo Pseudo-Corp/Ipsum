@@ -1,5 +1,5 @@
 import { Combat, Idling, Looting } from "../Classes/Skills"
-import { Health } from "../Classes/Stats";
+import { Damage, Health, Strength } from "../Classes/Stats";
 
 export interface Player {
     statistics: {
@@ -13,6 +13,8 @@ export interface Player {
         looting: Looting
     },
     stats: {
-        health: Health
+        health: Health,
+        damage: Damage,
+        strength: Strength,
     },
 }
