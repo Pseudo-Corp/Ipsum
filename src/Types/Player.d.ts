@@ -1,5 +1,13 @@
 import type { Combat, Idling, Looting } from '../Classes/Skills';
-import type { Armor, CriticalChance, CriticalDamage, Damage, Defense, Health, Strength } from '../Classes/Stats';
+import type {
+    Armor,
+    CriticalChance,
+    CriticalDamage,
+    Damage,
+    Defense,
+    Health,
+    Strength
+} from '../Classes/Stats';
 
 export interface Player {
     statistics: {
