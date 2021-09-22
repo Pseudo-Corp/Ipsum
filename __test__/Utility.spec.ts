@@ -19,25 +19,25 @@ describe('format', () => {
         expect(format(0.219999999999999, 2)).toEqual('0.22');
     });
 
-    test('Small, Accuracy = 4', function () {
+    test('Small, Accuracy = 4', () => {
         expect(format(0.003, 4)).toEqual('0.0030');
     });
 
-    test('Zero, Accuracy = 10', function () {
+    test('Zero, Accuracy = 10', () => {
         expect(format(0, 10)).toEqual('0');
     });
 
-    test('Negative, Accuracy = 4', function () {
+    test('Negative, Accuracy = 4', () => {
         expect(format(-1.4242425, 4)).toEqual('-1.4242');
     });
 
-    test('Large, Accuracy = 2', function () {
+    test('Large, Accuracy = 2', () => {
         expect(format(Math.pow(10, 9) - 1 + 0.3245, 2)).toEqual(
             '999,999,999.32'
         );
     });
 
-    test('Medium, Accuracy = 3', function () {
+    test('Medium, Accuracy = 3', () => {
         expect(format(421.235141, 3)).toEqual('421.235');
     });
 });

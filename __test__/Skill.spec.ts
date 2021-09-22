@@ -15,7 +15,7 @@ describe('combat skill', () => {
      * Base EXP 0, Base EXP > 0
      */
 
-    test('base level 0, base exp 0', function () {
+    test('base level 0, base exp 0', () => {
         const testSkill = createTestCombat(0, 0);
 
         expect(testSkill.level).toEqual(0);
@@ -69,7 +69,7 @@ describe('combat skill', () => {
         );
     });
 
-    test('base level 0, base exp = 1e10', function () {
+    test('base level 0, base exp = 1e10', () => {
         const testSkill = createTestCombat(0, 1e10);
 
         expect(testSkill.maxLevel).toEqual(testSkill.level);
