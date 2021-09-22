@@ -1,5 +1,5 @@
 import { Combat, Idling, Looting } from './Classes/Skills';
-import { Damage, Health, Strength } from './Classes/Stats';
+import { Armor, CriticalChance, CriticalDamage, Damage, Defense, Health, Strength } from './Classes/Stats';
 import type { Player } from './Types/Player';
 
 export const player: Player = {
@@ -16,7 +16,11 @@ export const player: Player = {
     stats: {
         health: new Health(),
         strength: new Strength(),
-        damage: new Damage()
+        damage: new Damage(),
+        defense: new Defense(),
+        armor: new Armor(),
+        criticalChance: new CriticalChance(),
+        criticalDamage: new CriticalDamage(),
     }
 };
 

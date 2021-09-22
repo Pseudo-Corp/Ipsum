@@ -15,6 +15,18 @@ export const statData: Record<keyof Player['stats'], statMetadata> = {
     },
     damage: {
         baseStat: 10
+    },
+    defense: {
+        baseStat: 0,
+    },
+    armor: {
+        baseStat: 0,
+    },
+    criticalChance: {
+        baseStat: 0,
+    },
+    criticalDamage: {
+        baseStat: 0,
     }
 };
 
@@ -99,5 +111,58 @@ export class Damage extends Stat {
             damage += boost;
         }
         this.value = damage;
+    }
+}
+export class Defense extends Stat {
+    constructor() {
+        super(statData.defense)
+    }
+    updateStat() {
+        let defense = 0;
+        const base = statData.defense.baseStat;
+        for (const boost of [base]) {
+            defense += boost
+        }
+        this.value = defense
+    }
+}
+export class Armor extends Stat {
+    constructor() {
+        super(statData.armor)
+    }
+    updateStat() {
+        let armor = 0;
+        const base = statData.armor.baseStat
+        for (const boost of [base]) {
+            armor += boost
+        }
+        this.value = armor
+    }
+}
+export class CriticalChance extends Stat {
+    constructor() {
+        super(statData.criticalChance)
+    }
+    updateStat() {
+        let critChance = 0
+        const base = statData.criticalChance.baseStat
+        const skill = player.skills.looting.computeStatIncrease();
+        for (const boost of [base, skill]) {
+            critChance += boost
+        }
+        this.value = critChance
+    }
+}
+export class CriticalDamage extends Stat {
+    constructor() {
+        super(statData.criticalDamage)
+    }
+    updateStat() {
+        let critDamage = 0
+        const base = statData.criticalDamage.baseStat
+        for (const boost of [base]) {
+            critDamage += boost
+        }
+        this.value = critDamage
     }
 }
