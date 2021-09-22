@@ -1,5 +1,5 @@
 interface CurrencyOptions {
-    allowNegative: boolean
+    allowNegative: boolean;
 }
 
 export class Currency {
@@ -8,7 +8,7 @@ export class Currency {
     constructor(
         public amount: number,
         public options: CurrencyOptions = {
-            allowNegative: false
+            allowNegative: false,
         }
     ) {
         this.amount = amount;
@@ -17,7 +17,7 @@ export class Currency {
 
     public add(amount: number): Currency {
         const added = this.amount + amount;
-        
+
         if (!Number.isSafeInteger(added)) {
             this.amount = Currency.MAX;
         } else {

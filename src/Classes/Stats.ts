@@ -1,69 +1,70 @@
 import { player } from "../Main.js";
 import { Player } from "../Types/Player.js";
-import { format } from "../utility.js"
+import { format } from "../utility.js";
 
 export interface statMetadata {
-    baseStat: number
-}
-export const statData: Record<keyof Player['stats'], statMetadata> = {
-    health: {
-        baseStat: 100
-    },
-    strength: {
-        baseStat: 0
-    },
-    damage: {
-        baseStat: 10
-    },
+    baseStat: number;
 }
 
+export const statData: Record<keyof Player["stats"], statMetadata> = {
+    health: {
+        baseStat: 100,
+    },
+    strength: {
+        baseStat: 0,
+    },
+    damage: {
+        baseStat: 10,
+    },
+};
+
 export abstract class Stat {
-    value: number
+    value: number;
     constructor(infos: statMetadata) {
         this.value = infos.baseStat;
     }
 
-    abstract updateStat():void
+    abstract updateStat(): void;
 
-    displayStat():string {
-        return format(this.value, 0)
+    displayStat(): string {
+        return format(this.value, 0);
     }
 }
 
 export class Health extends Stat {
-    current: number
+    current: number;
     constructor() {
         super(statData.health);
         this.current = this.value;
     }
 
-    checkBoundary():void {
-        this.current = Math.min(this.current, this.value)
+    checkBoundary(): void {
+        this.current = Math.min(this.current, this.value);
         if (this.current < 0) {
-            this.current = this.value
-            console.log("You've DIED. Note: Implement Death!")
+            this.current = this.value;
+            console.log("You've DIED. Note: Implement Death!");
         }
     }
 
-    heal(n: number):void {
-        this.current += n
+    heal(n: number): void {
+        this.current += n;
         this.checkBoundary();
     }
 
-    takeDamage(n:number):void {
+    takeDamage(n: number): void {
         this.heal(-n);
     }
 
-    displayCurrentHealth():string {
-        return format(this.current, 0)
+    displayCurrentHealth(): string {
+        return format(this.current, 0);
     }
 
-    updateStat():void {
+    updateStat(): void {
         let health = 0;
         const base = statData.health.baseStat;
         const skill = player.skills.idling.computeStatIncrease();
         for (const boost of [base, skill]) {
-            health += boost
+            health += boost;
         }
         this.value = health;
         this.checkBoundary();
@@ -72,10 +73,10 @@ export class Health extends Stat {
 
 export class Strength extends Stat {
     constructor() {
-        super(statData.strength)
+        super(statData.strength);
     }
 
-    updateStat():void {
+    updateStat(): void {
         let strength = 0;
         const base = statData.strength.baseStat;
         const skill = player.skills.combat.computeStatIncrease();
@@ -88,10 +89,10 @@ export class Strength extends Stat {
 
 export class Damage extends Stat {
     constructor() {
-        super(statData.damage)
+        super(statData.damage);
     }
 
-    updateStat():void {
+    updateStat(): void {
         let damage = 0;
         const base = statData.damage.baseStat;
         for (const boost of [base]) {
