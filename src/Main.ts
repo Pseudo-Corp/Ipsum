@@ -1,6 +1,6 @@
-import { Combat, Idling, Looting } from "./Classes/Skills"
-import { Damage, Health, Strength } from "./Classes/Stats"
-import type { Player } from "./Types/Player"
+import { Combat, Idling, Looting } from "./Classes/Skills.js"
+import { Damage, Health, Strength } from "./Classes/Stats.js"
+import type { Player } from "./Types/Player.js"
 
 export const player: Player = {
     statistics: {

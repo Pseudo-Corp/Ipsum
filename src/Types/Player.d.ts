@@ -1,5 +1,5 @@
-import { Combat, Idling, Looting } from "../Classes/Skills"
-import { Damage, Health, Strength } from "../Classes/Stats";
+import type { Combat, Idling, Looting } from "../Classes/Skills.js"
+import type { Damage, Health, Strength } from "../Classes/Stats.js";
 
 export interface Player {
     statistics: {

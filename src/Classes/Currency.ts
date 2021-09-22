@@ -1,34 +1,41 @@
+interface CurrencyOptions {
+    allowNegative: boolean
+}
 
 export class Currency {
-    cash: number
-    limit: number
+    static MAX = 2 ** 53 - 1;
 
-    
+    constructor(
+        public amount: number,
+        public options: CurrencyOptions = {
+            allowNegative: false
+        }
+    ) {
+        this.amount = amount;
+        this.options = options;
+    }
 
-    constructor(initialMoney: number, initialLimit = Math.pow(10, 9) - 1) {
-        this.cash = initialMoney
-        this.limit = initialLimit
-    };
+    public add(amount: number): Currency {
+        const added = this.amount + amount;
+        
+        if (!Number.isSafeInteger(added)) {
+            this.amount = Currency.MAX;
+        } else {
+            this.amount = added;
+        }
 
-    set(amount: number): void {
-        this.cash = amount;
-    };
+        return this;
+    }
 
-    earn(amount: number):void {
-        this.cash += amount;
-    };
+    public sub(amount: number): Currency {
+        const sub = this.amount - amount;
 
-    spend(amount: number):void {
-        if (this.canSpend(amount))
-            this.earn(-amount);
-        // TODO: Deal with the else case.
-    };
+        if (!this.options.allowNegative && sub < 0) {
+            this.amount = 0;
+        } else {
+            this.amount = sub;
+        }
 
-    canSpend(cost: number):boolean {
-        return this.cash >= cost; 
-    };
-
-    generateInterest(interestRate: number):void {
-        this.cash *= (1 + interestRate);
-    };
+        return this;
+    }
 }

@@ -1,10 +1,10 @@
-import { Player } from "../Types/Player";
-import { format, sumLinear, sumQuadratic } from "../utility";
+import { Player } from "../Types/Player.js";
+import { format, sumLinear, sumQuadratic } from "../utility.js";
 
 export interface skillMetadata {
     maxLevel: number,
     expCoefficient: number,
-    thresholds: Array<number>
+    thresholds: number[]
 }
 
 export const skillData: Record<keyof Player['skills'], skillMetadata> = {
@@ -30,7 +30,7 @@ export abstract class Skills {
     level: number
     exp: number
     expCoefficient: number
-    thresholds: Array<number>
+    thresholds: number[]
 
     constructor(infos: skillMetadata, level = 0, exp = 0) {
         this.maxLevel = infos.maxLevel;
@@ -43,7 +43,7 @@ export abstract class Skills {
 
 
     calculateEXPToLevelUp(n?: number):number {
-        let rawLevel = n || this.level + 1
+        const rawLevel = n || this.level + 1
         let effectiveLevel = 0;
 
         if (rawLevel > this.maxLevel) {
@@ -114,7 +114,7 @@ export class Combat extends Skills {
     computeStatIncrease(n?: number):number {
         this.calculateLevel();
         const rawLevel = n || this.level
-        let statIncrease:number = 0;
+        let statIncrease = 0;
 
         for (const threshold of this.thresholds) {
             statIncrease += Math.max(0, rawLevel - threshold)

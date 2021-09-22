@@ -1,6 +1,7 @@
 {
   "name": "ps0",
   "private": true,
+  "type": "module",
   "engines": {
     "node": "^14.15.x",
     "vscode": "^1.59.0"
