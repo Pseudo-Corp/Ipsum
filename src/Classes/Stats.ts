@@ -74,8 +74,8 @@ export class Health extends Stat {
     updateStat(): void {
         let health = 0;
         const base = statData.health.baseStat;
-        const skill = player.skills.idling.computeStatIncrease();
-        for (const boost of [base, skill]) {
+    //    const skill = player.skills.idling.computeStatIncrease();
+        for (const boost of [base]) {
             health += boost;
         }
         this.value = health;
